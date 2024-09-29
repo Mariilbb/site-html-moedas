@@ -1,0 +1,72 @@
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade 26_08</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 5px solid #000000;
+            background-color: #b2f0e4;
+            border-radius: 15px;
+        }
+        h1 {
+            color: #ff6f6f;
+            font-family: 'Jersey 10';
+            font-size: 72px;
+            margin: 0;
+            padding: 20px 0;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ff6f6f;
+            box-sizing: border-box;
+            font-size: 25px;
+            border-radius: 10px;
+        }
+        button {
+            padding: 15px 20px;
+            background-color: #ff6f6f;
+            color: #ffffff;
+            border: none;
+            font-size: 18px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #ff4f4f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Digite um país!</h1>
+        <input placeholder="nome do país" id="pais">
+        <button onclick="pesquisar()">Pesquisar</button>
+    </div>
+    <script>
+        function pesquisar() {
+            var pais = document.getElementById("pais").value;
+            var req = fetch("http://localhost/projeto/index.php", {
+                method: "POST",
+                body: JSON.stringify({"pais": pais})
+            });
+            req.then((response) => {
+                return response.json();
+            }).then((data) => {
+                window.alert("A moeda de " + pais + " é: " + data["nome"] + " (" + data["moeda"] + ")");
+            });
+        }
+    </script>
+</body>
+</html>
